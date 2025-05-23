@@ -1,5 +1,6 @@
 
 import { ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,7 +24,14 @@ const Cart = ({
   onRemoveItem, 
   totalPrice 
 }: CartProps) => {
+  const navigate = useNavigate();
+  
   if (!isOpen) return null;
+
+  const handleCheckout = () => {
+    onClose();
+    navigate('/checkout');
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 animate-fade-in">
@@ -108,7 +116,10 @@ const Cart = ({
                 <span className="text-lg font-semibold">Total:</span>
                 <span className="text-xl font-bold text-medical-700">${totalPrice.toFixed(2)}</span>
               </div>
-              <Button className="w-full bg-medical-500 hover:bg-medical-600 text-white">
+              <Button 
+                className="w-full bg-medical-500 hover:bg-medical-600 text-white"
+                onClick={handleCheckout}
+              >
                 Proceed to Checkout
               </Button>
             </div>

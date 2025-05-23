@@ -54,6 +54,10 @@ export const useCart = () => {
 
   const clearCart = useCallback(() => {
     setCartItems([]);
+    toast({
+      title: "Cart Cleared",
+      description: "All items have been removed from your cart",
+    });
   }, []);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
